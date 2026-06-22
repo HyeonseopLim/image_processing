@@ -1,9 +1,14 @@
 # image_processing
 
-[imgaug](https://github.com/aleju/imgaug) 기반 이미지 증폭(augmentation) 툴.
+이미지 처리 도구 모음.
 
-TIFF / JPEG / BMP 이미지를 입력받아, 원하는 변환 기법과 강도를 선택해
-지정한 개수만큼 증폭 이미지를 생성한다.
+| 도구 | 실행 | 설명 |
+|------|------|------|
+| **이미지 증폭** | `run.bat` / `python -m augtool` | [imgaug](https://github.com/aleju/imgaug) 기반. 변환 기법·강도 선택해 지정 개수만큼 증폭 |
+| **외곽선 강조 (Sobel)** | `run_sobel.bat` / `python -m sobeltool` | 폴더 내 이미지의 외곽선을 Sobel/Scharr/Laplacian/Canny 로 강조 |
+
+> 증폭 툴: TIFF / JPEG / BMP 이미지를 입력받아, 원하는 변환 기법과 강도를 선택해
+> 지정한 개수만큼 증폭 이미지를 생성한다.
 
 ---
 
@@ -107,23 +112,43 @@ python -m augtool
 
 ---
 
+## 3-B. 외곽선 강조 (Sobel) 툴
+
+```bash
+run_sobel.bat        # 또는  python -m sobeltool
+```
+
+1. **입력 폴더** 선택 → TIFF/JPEG/BMP/PNG 자동 탐색
+2. **엣지 방식** 선택: Sobel / Scharr(정밀) / Laplacian / Canny
+3. **출력 모드**: `외곽선 강조`(원본에 엣지 덧입힘) / `외곽선만`(엣지 맵)
+4. 파라미터: 커널 크기(1·3·5·7), 강도(0~3), Canny 임계값, 반전
+   - 변경 시 우측 **미리보기** 실시간 갱신
+5. **외곽선 변환 시작** → `{원본이름}_edge.{확장자}` 로 저장 (포맷·채널 보존)
+
+---
+
 ## 4. 프로젝트 구조
 
 ```
 image_processing/
-├── run.bat                  # 실행 진입점
+├── run.bat                  # 증폭 툴 실행
+├── run_sobel.bat            # 외곽선 강조 툴 실행
 ├── requirements.txt
-└── augtool/
-    ├── __main__.py          # python -m augtool 진입점
-    ├── core/
-    │   ├── augmenters.py     # 변환 기법 레지스트리(강도→imgaug)
-    │   └── pipeline.py       # 이미지 입출력 + 배치 증폭
-    └── ui/
-        ├── style.py          # 폰트(Pretendard/Malgun)·자간·테마
-        ├── widgets.py        # 기법 선택 위젯
-        ├── worker.py         # QThread 백그라운드 증폭
-        ├── main_window.py    # 메인 윈도우
-        └── assets/fonts/     # Pretendard 폰트 위치(선택)
+├── augtool/                 # 이미지 증폭 툴
+│   ├── __main__.py          # python -m augtool 진입점
+│   ├── core/
+│   │   ├── augmenters.py     # 변환 기법 레지스트리(강도→imgaug)
+│   │   └── pipeline.py       # 이미지 입출력 + 배치 증폭
+│   └── ui/
+│       ├── style.py          # 폰트(Pretendard/Malgun)·자간·테마 (공용)
+│       ├── widgets.py        # 기법 선택 위젯
+│       ├── worker.py         # QThread 백그라운드 증폭
+│       ├── main_window.py    # 메인 윈도우
+│       └── assets/fonts/     # Pretendard 폰트 위치(선택)
+└── sobeltool/               # 외곽선 강조 툴
+    ├── __main__.py          # python -m sobeltool 진입점
+    ├── core.py              # 엣지 검출 + 외곽선 강조 + 배치
+    └── ui.py                # GUI (augtool 테마 재사용)
 ```
 
 ---
