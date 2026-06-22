@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+env/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# 증폭 입출력 (샘플 외 데이터는 커밋하지 않음)
+/input/
+/output/
+*.tiff
+*.tif
+*.bmp
+!samples/**
