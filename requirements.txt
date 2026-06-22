@@ -1,0 +1,10 @@
+# imgaug 0.4.0 호환 스택 (numpy 1.x 고정 필수)
+# imgaug는 numpy>=2.0(np.sctypes 제거)에서 import 실패하므로 numpy 1.x 핀 유지
+numpy==1.23.5
+scipy==1.10.1
+scikit-image==0.19.3
+matplotlib==3.7.5
+opencv-python==4.10.0.84
+imgaug==0.4.0
+Pillow==12.2.0
+imageio==2.37.3
