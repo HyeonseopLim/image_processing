@@ -121,5 +121,16 @@ def apply_theme(app: QApplication) -> str:
         QScrollBar::handle:vertical {{ background: #CBD5E1; border-radius: 5px; min-height: 30px; }}
         QScrollBar::handle:vertical:hover {{ background: {MUTED}; }}
         QScrollBar::add-line, QScrollBar::sub-line {{ height: 0; }}
+
+        /* 비활성(잠금) 상태 — 회색으로 명확히 표시 */
+        QLabel:disabled, QLabel#Muted:disabled, QCheckBox:disabled {{ color: #B4BAC4; }}
+        QCheckBox::indicator:disabled {{
+            background: #EEF1F5; border-color: #DDE1E7;
+        }}
+        QComboBox:disabled, QSpinBox:disabled, QLineEdit:disabled {{
+            background: #EEF1F5; color: #B4BAC4; border-color: {BORDER};
+        }}
+        QSlider::groove:horizontal:disabled {{ background: #EAECF0; }}
+        QPushButton:disabled {{ background: #EEF1F5; color: #B4BAC4; border-color: {BORDER}; }}
     """)
     return family
